@@ -1,5 +1,5 @@
 name: CICD Java project
-on: push
+on: workflow_dispatch
 jobs:
     CICD-pipeline:
       runs-on: ubuntu-latest
