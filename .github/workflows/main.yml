@@ -9,7 +9,7 @@ jobs:
       - name: Install java and Maven
         uses: actions/setup-java@v5
         with:
-          java_version: 17
+          java-version: 17
           distribution: temurin
       - name: Compile code 
         run: mvn compile 
