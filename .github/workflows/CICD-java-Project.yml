@@ -13,4 +13,7 @@ jobs:
        distribution: temurin
        java-version: '17'
    - name: Setup Docker 
-     uses: docker/setup-buildx-action@v4
+     run: sudo apt update && sudo apt install docker.io -y
+   - name: Docker version
+     run: docker --version
+    
