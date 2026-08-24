@@ -1,5 +1,5 @@
 name: Continuous Integration for Java code using Maven 
-on: push
+on: workflow_dispatch
 jobs:
     buildJob:
       runs-on: ubuntu-latest 
