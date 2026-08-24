@@ -1,4 +1,4 @@
-name: CICD on Selfhosted Runner 
+name: CICD execute on Selfhosted Runner 
 on: push
 jobs:
   CICD-job:
