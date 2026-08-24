@@ -1,4 +1,4 @@
-name: CICD execute on Selfhosted Runner 
+name: CICD on Selfhosted Runner 
 on: push
 jobs:
   CICD-job:
@@ -9,11 +9,14 @@ jobs:
      uses: actions/checkout@v7
    - name: Install Java 
      uses: actions/setup-java@v5
-     with:
+      with:
        distribution: temurin
        java-version: '17'
    - name: Setup Docker 
      run: sudo apt update && sudo apt install docker.io -y
-   - name: Docker version
-     run: docker --version
-    
+   - name: Build the code 
+     run: mvn package 
+   - name: Build the dockerfile to build Image 
+     run: docker build -t myimagecicd .
+   - name: Build the container and deploy the application 
+     run: docker run -d -P myimagecicd
