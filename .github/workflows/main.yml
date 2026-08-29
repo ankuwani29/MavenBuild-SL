@@ -9,10 +9,10 @@ jobs:
         uses: actions/checkout@v7
         
       - name: Install Java and Maven
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '25'
+          java-version: '17'
 
       - name: complie code
         run: mvn complie
