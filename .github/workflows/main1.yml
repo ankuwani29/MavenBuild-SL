@@ -1,0 +1,25 @@
+name: CI with java using maven
+on: push
+
+jobs:
+  buildjob:
+    runs-on: ubuntu-slim
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v7
+        
+      - name: Install Java and Maven
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25
+
+    - name: complie code
+      run: mvn complie
+
+    - name: Test the code
+      run: mvn test
+
+    - name: Package the code 
+      run: mvn package
+      
