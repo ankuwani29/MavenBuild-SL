@@ -15,7 +15,7 @@ jobs:
           java-version: '17'
 
       - name: complie code
-        run: mvn complie
+        run: mvn compile
 
       - name: Test the code
         run: mvn test
