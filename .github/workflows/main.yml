@@ -3,7 +3,7 @@ on: push
 
 jobs:
   buildjob:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v7
