@@ -1,52 +1,35 @@
-name: CI with Java using Maven
+name: CI with java using maven
 on: push
 
 jobs:
   buildjob:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4   # latest stable
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
+      - name: checkout code
+        uses: actions/checkout@v7
+        
+      - name: Install Java and Maven
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
 
-      - name: Compile code
+      - name: compile code
         run: mvn compile
 
       - name: Test the code
         run: mvn test
 
-      - name: Package the code
+      - name: Package the code 
         run: mvn package
 
       - name: Upload artifact to repo
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: buildfile
-          path: target/
-
-  sonarqubeJob:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the code on runner VM
-        uses: actions/checkout@v4
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
+             name: buildfile
+             path: /home/runner/work/MavenBuild-SL/MavenBuild-SL/target/
 
       - name: SonarQube Scan
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.2.0.4988:sonar \
-            -Dsonar.projectKey=sonarqube-githubaction-aug2026_sonarcudedemo-github \
-            -Dsonar.organization=sonarqube-githubaction-aug2026 \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: mvn  -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.2.0.4988:sonar -Dsonar.projectKey=sonarqube-githubaction-aug2026_sonarcudedemo-github -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.organization=sonarqube-githubaction-aug2026 -Dsonar.token=$SONAR_TOKEN
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
