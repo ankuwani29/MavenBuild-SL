@@ -1,5 +1,5 @@
 name: CI with java using maven
-on: push
+on:  push
 
 jobs:
   buildjob:
@@ -29,7 +29,14 @@ jobs:
              name: buildfile
              path: /home/runner/work/MavenBuild-SL/MavenBuild-SL/target/
 
-      - name: SonarQube Scan
-        run: mvn  -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.2.0.4988:sonar -Dsonar.projectKey=sonarqube-githubaction-aug2026_sonarcudedemo-github -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.organization=sonarqube-githubaction-aug2026 -Dsonar.token=$SONAR_TOKEN
+  sonarqubeJob:
+        runs-on: ubuntu-latest
+        steps:
+        - name: SonarQube Scan
+          run: mvn  -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.2.0.4988:sonar 
+                  -Dsonar.projectKey=sonarqube-githubaction-aug2026_sonarcudedemo-github 
+                  -Dsonar.host.url=https://sonarcloud.io/ 
+                  -Dsonar.organization=sonarqube-githubaction-aug2026 
+                  -Dsonar.token=$SONAR_TOKEN
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
